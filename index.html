@@ -2,52 +2,169 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NJLabs — Practical AI Systems</title>
-  <meta name="description" content="NJLabs builds practical AI systems for real-world leverage. Non-custodial, compliance-first autonomous research and execution rails." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NJLabs — Intelligence Infrastructure for Operators</title>
+  <meta name="description" content="NJLabs builds compliance-first, non-custodial AI execution infrastructure for serious operators. Simulation-first. Risk-gated. Human-supervised by design." />
+  <meta name="theme-color" content="#070b14" />
   <style>
-    body{font-family:Inter,system-ui,Arial,sans-serif;background:#0b1020;color:#f8fafc;margin:0}
-    .wrap{max-width:960px;margin:0 auto;padding:40px 20px}
-    .tag{color:#00d1ff;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
-    h1{font-size:44px;line-height:1.1;margin:12px 0 16px}
-    p{color:#c3cede;font-size:18px;line-height:1.6}
-    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-    .btn{background:#00d1ff;color:#00101a;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700}
-    .btn.alt{background:#1f2a44;color:#f8fafc}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:36px}
-    .card{background:#131b33;border:1px solid #253154;border-radius:12px;padding:14px}
-    .foot{margin-top:40px;color:#7c8aa5;font-size:14px}
-    input{padding:12px;border-radius:10px;border:1px solid #334067;background:#0f1730;color:#fff;min-width:260px}
+    :root{
+      --bg:#070b14;
+      --bg-2:#0d1424;
+      --txt:#eaf1ff;
+      --muted:#9cb0d1;
+      --line:#203056;
+      --c1:#59f2ff;
+      --c2:#7a8bff;
+      --c3:#8affc4;
+      --radius:16px;
+      --shadow:0 14px 40px rgba(0,0,0,.28);
+      --w:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 500px at 80% -10%,rgba(122,139,255,.18),transparent 55%),radial-gradient(800px 450px at 10% 0%,rgba(89,242,255,.13),transparent 55%),var(--bg);color:var(--txt);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+    a{color:inherit}
+
+    .wrap{max-width:var(--w);margin:0 auto;padding:20px}
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:8px 0 2px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+    .dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 0 16px rgba(89,242,255,.7)}
+    .nav-links{display:flex;gap:18px;color:var(--muted);font-size:14px}
+
+    .hero{padding:76px 0 54px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(16,26,50,.55);padding:8px 12px;border-radius:999px;color:#b8d9ff;font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:650}
+    h1{margin:16px 0 14px;font-size:clamp(34px,6vw,64px);line-height:1.02;letter-spacing:-.02em;max-width:16ch}
+    .lead{margin:0;max-width:58ch;color:var(--muted);font-size:clamp(16px,2vw,20px);line-height:1.55}
+
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+    .btn{border:1px solid var(--line);padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:650;transition:transform .18s ease,background .2s ease,border-color .2s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--c1),#7ed9ff 45%,var(--c2));color:#041022;border:none}
+    .btn.secondary{background:rgba(17,28,52,.65);color:#deebff}
+
+    .signal{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg,rgba(18,29,56,.85),rgba(11,19,37,.82));
+      box-shadow:var(--shadow);
+      padding:16px;
+      min-height:280px
+    }
+    .signal .row{display:flex;justify-content:space-between;align-items:center;padding:10px 8px;border-bottom:1px solid rgba(68,91,138,.35);font-size:13px;color:#c7d7f4}
+    .signal .row:last-child{border-bottom:none}
+    .badge{font-size:11px;padding:4px 8px;border-radius:999px;border:1px solid #386ca1;background:rgba(20,40,70,.55);color:#92d8ff}
+
+    .metrics{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:12px;margin:6px 0 34px}
+    .metric{border:1px solid var(--line);background:rgba(14,24,47,.6);border-radius:12px;padding:14px}
+    .metric b{display:block;font-size:24px;line-height:1.05;margin-bottom:4px}
+    .metric span{font-size:12px;color:var(--muted)}
+
+    .section{padding:28px 0}
+    h2{margin:0 0 12px;font-size:clamp(22px,3.2vw,34px);letter-spacing:-.01em}
+    .copy{margin:0;color:var(--muted);max-width:70ch;line-height:1.62}
+
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+    .card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(21,35,66,.68),rgba(12,21,40,.75));border-radius:14px;padding:16px}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .card p{margin:0;color:var(--muted);line-height:1.5}
+
+    .waitlist{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:16px}
+    .input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #2e426c;background:rgba(8,14,27,.8);color:var(--txt);font-size:15px}
+    .input:focus{outline:2px solid rgba(89,242,255,.45);outline-offset:1px}
+
+    footer{padding:34px 0 54px;color:#7f93b5;font-size:13px}
+
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr;gap:18px;padding-top:52px}
+      .metrics{grid-template-columns:repeat(2,minmax(120px,1fr))}
+      .grid{grid-template-columns:1fr}
+      .waitlist{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important;transition:none !important}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="tag">NJLabs</div>
-    <h1>Practical AI systems for real-world leverage.</h1>
-    <p>We build compliance-first, non-custodial AI research and execution rails. Simulation-first, risk-gated, and operator-controlled by design.</p>
+    <header class="nav">
+      <div class="brand"><span class="dot" aria-hidden="true"></span> NJLabs</div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#platform">Platform</a>
+        <a href="#principles">Principles</a>
+        <a href="#access">Access</a>
+      </nav>
+    </header>
 
-    <div class="cta">
-      <a class="btn" href="#waitlist">Join Waitlist</a>
-      <a class="btn alt" href="#focus">See Focus Areas</a>
-    </div>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow">Operator-grade AI infrastructure</div>
+          <h1 id="hero-title">Build advantage. Keep control.</h1>
+          <p class="lead">We design compliance-first, non-custodial execution rails for teams that demand speed without sacrificing governance. Simulation-first. Risk-gated. Human-supervised by default.</p>
+          <div class="cta">
+            <a class="btn primary" href="#access">Request Early Access</a>
+            <a class="btn secondary" href="#principles">See Design Principles</a>
+          </div>
+        </div>
 
-    <div id="focus" class="grid">
-      <div class="card"><strong>Non-custodial architecture</strong><br/>Users retain control of capital and keys.</div>
-      <div class="card"><strong>Simulation-first</strong><br/>Falsifiable testing before any live execution.</div>
-      <div class="card"><strong>Approval gates</strong><br/>Human-in-the-loop controls for critical actions.</div>
-      <div class="card"><strong>Audit trails</strong><br/>Traceable decisions, runs, and execution logs.</div>
-    </div>
+        <aside class="signal" aria-label="Live system qualities">
+          <div class="row"><span>Execution posture</span><span class="badge">Supervised</span></div>
+          <div class="row"><span>Custody model</span><span class="badge">Non-custodial</span></div>
+          <div class="row"><span>Decision flow</span><span class="badge">Approval-gated</span></div>
+          <div class="row"><span>Research mode</span><span class="badge">Simulation-first</span></div>
+          <div class="row"><span>Auditability</span><span class="badge">End-to-end logs</span></div>
+        </aside>
+      </section>
 
-    <div id="waitlist" style="margin-top:36px">
-      <h2>Design Partner Waitlist</h2>
-      <p style="font-size:16px">We are onboarding a small cohort of operator teams and treasuries.</p>
-      <form>
-        <input type="email" placeholder="you@company.com" />
-        <a class="btn" href="#" onclick="alert('Connect this form to your email/CRM backend.');return false;">Request Access</a>
-      </form>
-    </div>
+      <section class="metrics" aria-label="Highlights">
+        <div class="metric"><b>Zero</b><span>custody of user funds</span></div>
+        <div class="metric"><b>Fast</b><span>execution with policy gates</span></div>
+        <div class="metric"><b>Full</b><span>traceability and rollback paths</span></div>
+        <div class="metric"><b>Lean</b><span>performance-first web stack</span></div>
+      </section>
 
-    <div class="foot">© NJLabs • Built in public, shipped with discipline.</div>
+      <section id="platform" class="section">
+        <h2>Built for modern operators</h2>
+        <p class="copy">NJLabs combines practical AI execution, controlled automation, and governance rails into one operating model. You get velocity, observability, and safety by design — without bloated interfaces or fragile workflows.</p>
+      </section>
+
+      <section id="principles" class="section">
+        <h2>Design principles</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Deterministic over noisy</h3>
+            <p>CLI/API-first and UIA-guided actions where reliability matters; visual fallbacks only when truly required.</p>
+          </article>
+          <article class="card">
+            <h3>Security as default</h3>
+            <p>Least privilege, OTP approvals, and explicit risk tiers for write actions and sensitive operations.</p>
+          </article>
+          <article class="card">
+            <h3>Speed with discipline</h3>
+            <p>Rapid iteration with simulation-before-live controls, auditable execution trails, and clear stop conditions.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="access" class="section">
+        <h2>Early access for design partners</h2>
+        <p class="copy">We are onboarding a small cohort of teams focused on compliant, non-custodial AI execution. If that is your posture, we should talk.</p>
+        <form class="waitlist" onsubmit="event.preventDefault(); window.alert('Great — next step: connect this form to your backend/CRM endpoint.');">
+          <label for="email" class="sr-only" style="position:absolute;left:-9999px;">Email</label>
+          <input id="email" class="input" type="email" placeholder="you@company.com" required />
+          <button class="btn primary" type="submit">Request Access</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>© <span id="year"></span> NJLabs · Built with discipline, optimized for speed.</footer>
   </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
