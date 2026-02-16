@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NJLabs — Quiet Luxury</title>
+  <meta name="description" content="NJLabs builds compliance-first, non-custodial AI execution infrastructure." />
+  <style>
+    :root{--bg:#f7f6f2;--paper:#ffffff;--ink:#161616;--muted:#5d5d5d;--line:#e7e3d8;--accent:#274b6a;--w:980px}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    .wrap{max-width:var(--w);margin:0 auto;padding:28px 22px 56px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:8px 0 24px}
+    .brand{font-weight:700;letter-spacing:.03em}
+    .hero{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:54px 42px}
+    .kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+    h1{font-size:clamp(34px,7vw,62px);line-height:1.03;margin:14px 0 16px;letter-spacing:-.02em;max-width:14ch}
+    p{color:var(--muted);line-height:1.65;max-width:64ch;margin:0}
+    .cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+    .btn{padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:600;border:1px solid var(--line)}
+    .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)} .btn.secondary{background:#fff;color:var(--ink)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+    .card b{display:block;margin-bottom:6px}
+    footer{margin-top:22px;color:#777;font-size:13px}
+    @media (max-width:900px){.hero{padding:36px 24px}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav"><div class="brand">NJLabs</div><div style="color:#6b6b6b;font-size:14px">Infrastructure for operators</div></header>
+    <main class="hero">
+      <div class="kicker">Compliance-first · Non-custodial</div>
+      <h1>Build advantage with calm precision.</h1>
+      <p>NJLabs designs practical AI execution infrastructure for teams that need speed, governance, and auditability without interface clutter.</p>
+      <div class="cta">
+        <a class="btn primary" href="#">Request Early Access</a>
+        <a class="btn secondary" href="#">Read Principles</a>
+      </div>
+      <section class="grid">
+        <article class="card"><b>Simulation-first</b><span>Falsifiable tests before live execution.</span></article>
+        <article class="card"><b>Human-supervised</b><span>Approval gates for higher-risk actions.</span></article>
+        <article class="card"><b>Auditable by design</b><span>Traceable decisions and run history.</span></article>
+      </section>
+    </main>
+    <footer>© <span id="y"></span> NJLabs</footer>
+  </div>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
