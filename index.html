@@ -8,82 +8,114 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./favicon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="./favicon-512.png" />
   <style>
-    :root{--navy-900:#0A1020;--navy-700:#132344;--blue:#2F7BFF;--green:#16D98A;--white:#FFFFFF;--muted:#b9c6e5}
-    *{box-sizing:border-box} body{font-family:Inter,system-ui,Arial,sans-serif;background:
-      linear-gradient(rgba(5,12,28,.88),rgba(5,12,28,.92)),
-      url('./assets/branding/theme-bg.jpg') center/cover fixed no-repeat;
-      color:var(--white);margin:0}
-    .wrap{max-width:1120px;margin:0 auto;padding:24px 20px 42px}
-    .site-header{position:relative;border:1px solid #2a3a62;border-radius:18px;overflow:hidden;min-height:220px;background:
-      linear-gradient(90deg,rgba(7,14,30,.90),rgba(7,14,30,.55)),
-      url('./assets/branding/njlabs-banner-header.jpg') center/cover no-repeat}
-    .site-header-inner{display:flex;justify-content:space-between;align-items:flex-start;padding:28px 30px}
-    .brand-block{display:flex;flex-direction:column;gap:8px}
-    .brand-title{font-size:44px;font-weight:800;letter-spacing:.02em;line-height:1}
-    .brand-sub{font-size:24px;color:#dbe6ff;font-weight:500}
-    .tag{color:var(--blue);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
-    h1{font-size:54px;line-height:1.04;margin:14px 0} h2{font-size:34px;margin:0 0 12px}
+    :root{
+      --navy-900:#060d1f; --navy-700:#132344; --blue:#4d7dff; --green:#16d98a;
+      --white:#fff; --muted:#c3d1ef; --panel:#111f3f;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--white);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(rgba(6,13,31,.84),rgba(6,13,31,.92)),url('./assets/branding/theme-bg.jpg') center/cover fixed no-repeat;
+    }
+    .wrap{max-width:1160px;margin:0 auto;padding:26px 22px 48px}
+
+    .site-header{
+      position:relative; overflow:hidden; border-radius:22px; min-height:250px;
+      border:1px solid rgba(124,151,210,.25);
+      background:linear-gradient(90deg,rgba(6,13,31,.78),rgba(6,13,31,.35)),url('./assets/branding/header-banner-v2-c3.png') center/cover no-repeat;
+      box-shadow:0 20px 60px rgba(0,0,0,.3);
+    }
+    .site-header-inner{padding:30px 34px 34px; display:flex; align-items:flex-start; justify-content:space-between; gap:20px}
+    .brand-stack{display:flex; gap:18px; align-items:flex-start}
+    .brand-logo{width:70px; height:70px; border-radius:14px; object-fit:cover; border:1px solid rgba(124,151,210,.35)}
+    .brand-lines{display:flex; flex-direction:column; gap:8px}
+    .brand-name{font-size:58px; line-height:.95; font-weight:800; letter-spacing:.01em; font-family:"Space Grotesk",Inter,system-ui,sans-serif}
+    .brand-sub{font-size:30px; line-height:1; font-weight:600; color:#d9e6ff; font-family:"Space Grotesk",Inter,system-ui,sans-serif}
+    .brand-sub2{font-size:30px; line-height:1.05; font-weight:600; color:#d9e6ff; font-family:"Space Grotesk",Inter,system-ui,sans-serif}
+
+    h1{font-size:58px;line-height:1.02;margin:26px 0 14px;max-width:900px;font-weight:800;letter-spacing:-.01em}
+    .hero-lead{font-size:23px;line-height:1.55;color:var(--muted);max-width:940px;margin:0}
+
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn{background:var(--blue);color:#031335;padding:13px 20px;border-radius:11px;text-decoration:none;font-weight:800;display:inline-block}
+    .btn.alt{background:#253b73;color:var(--white)}
+
+    .section{margin-top:54px}
+    h2{font-size:38px;line-height:1.08;margin:0 0 14px;font-weight:800;letter-spacing:-.01em}
     p{color:var(--muted);font-size:19px;line-height:1.6;margin:10px 0}
-    .hero{display:grid;grid-template-columns:1fr;gap:16px;align-items:center;margin-top:24px}
-    .proof{width:100%;border-radius:14px;border:1px solid #2a3a62;background:var(--navy-700)}
-    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-    .btn{background:var(--blue);color:#00132c;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:800;display:inline-block}
-    .btn.alt{background:#1e2e57;color:var(--white)} .section{margin-top:52px}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
-    .card{background:var(--navy-700);border:1px solid #2b3b61;border-radius:12px;padding:16px}.card strong{display:block;font-size:18px;margin-bottom:8px}
-    .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.price{font-size:42px;font-weight:800;color:var(--green);margin:8px 0}
-    ul{color:var(--muted);line-height:1.7}.footer{margin-top:54px;padding-top:20px;border-top:1px solid #22325a;color:#89a0d0;font-size:14px}
-    @media (max-width:920px){h1{font-size:40px}.hero{grid-template-columns:1fr}.site-header-inner{padding:20px}.brand-title{font-size:34px}.brand-sub{font-size:18px}}
+    .card{background:rgba(19,35,68,.82);border:1px solid rgba(124,151,210,.25);border-radius:12px;padding:18px;backdrop-filter:blur(2px)}
+    .card strong{display:block;font-size:21px;margin-bottom:8px}
+
+    .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+    .price{font-size:44px;font-weight:800;color:var(--green);margin:10px 0}
+    ul{color:var(--muted);line-height:1.7}
+    .proof{width:100%;border-radius:14px;border:1px solid rgba(124,151,210,.25)}
+    .footer{margin-top:58px;padding-top:22px;border-top:1px solid rgba(124,151,210,.25);color:#8ea7da;font-size:14px}
+
+    @media (max-width:980px){
+      .brand-name{font-size:46px}.brand-sub,.brand-sub2{font-size:24px}
+      h1{font-size:44px}.hero-lead{font-size:20px}
+    }
+    @media (max-width:700px){
+      .site-header-inner{padding:20px}
+      .brand-stack{gap:12px}
+      .brand-logo{width:56px;height:56px}
+      .brand-name{font-size:36px}.brand-sub,.brand-sub2{font-size:18px}
+      h1{font-size:36px}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header class="site-header">
       <div class="site-header-inner">
-        <div class="brand-block">
-          <div class="brand-title">NJLabs</div>
-          <div class="brand-sub">Advanced AI System</div>
+        <div class="brand-stack">
+          <img class="brand-logo" src="./assets/branding/logo-concept-3.png" alt="NJLabs logo concept 3" />
+          <div class="brand-lines">
+            <div class="brand-name">NJLabs</div>
+            <div class="brand-sub">Advanced AI Systems</div>
+            <div class="brand-sub2">Resilient OpenClaw Infrastructure</div>
+          </div>
         </div>
-        <div class="tag">Resilient AI Infrastructure</div>
       </div>
     </header>
 
-    <section class="hero">
-      <div>
-        <h1>Resilient OpenClaw Infrastructure, <span style="color:var(--blue)">Without Downtime.</span></h1>
-        <p>NJLabs helps operators migrate OpenClaw across local, VPS, and clustered environments with rollback-safe execution and verified recovery.</p>
-        <div class="cta">
-          <a class="btn" href="#cta">Book a 30-minute Resilience Audit</a>
-          <a class="btn alt" href="#packages">View Service Packages</a>
-        </div>
+    <section>
+      <h1>Resilient OpenClaw Infrastructure, <span style="color:var(--blue)">Without Downtime.</span></h1>
+      <p class="hero-lead">We architect and operate production OpenClaw environments across local, VPS, and clustered deployments — with rollback-safe transitions, session continuity, and verified recovery evidence.</p>
+      <div class="cta">
+        <a class="btn" href="#cta">Book a 30-minute Resilience Audit</a>
+        <a class="btn alt" href="#packages">View Service Packages</a>
       </div>
     </section>
 
     <section class="section" id="problem">
-      <h2>Why teams call us</h2>
+      <h2>Where most operator stacks fail</h2>
       <div class="grid">
-        <div class="card"><strong>Migration downtime</strong>Cutovers fail and service windows stretch longer than expected.</div>
-        <div class="card"><strong>State/session loss</strong>Critical context disappears during infra transitions.</div>
-        <div class="card"><strong>Brittle recovery</strong>Backups exist, but restore confidence is low without drills.</div>
-        <div class="card"><strong>No rollback confidence</strong>Most operators lack a tested path back to known-good state.</div>
+        <div class="card"><strong>Migration downtime</strong>Cutovers fail and service windows stretch longer than planned.</div>
+        <div class="card"><strong>State/session loss</strong>Critical context disappears during infrastructure transitions.</div>
+        <div class="card"><strong>Brittle recovery</strong>Backups exist, but restore confidence is weak without drills.</div>
+        <div class="card"><strong>No rollback certainty</strong>Most teams lack a tested path back to known-good state.</div>
       </div>
     </section>
 
     <section class="section" id="solution">
-      <h2>Our resilience model</h2>
+      <h2>How NJLabs runs resilience engineering</h2>
       <ul>
         <li>Migration planning with explicit failure-mode checks</li>
         <li>Controlled cutover with continuity safeguards</li>
-        <li>Snapshot + rollback point registration in recovery module</li>
+        <li>Snapshot + rollback registration in recovery module</li>
         <li>Restore drill validation with evidence handoff</li>
       </ul>
     </section>
 
     <section class="section" id="packages">
-      <h2>Packages</h2>
+      <h2>Service Packages</h2>
       <div class="pricing">
         <div class="card"><strong>Starter Migration Sprint</strong><div class="price">$299</div><ul><li>Single-node migration (local ↔ VPS)</li><li>Validation checklist</li><li>Operator handoff notes</li></ul></div>
-        <div class="card" style="background:#0f1c39"><strong>Resilience Pro</strong><div class="price">$999</div><ul><li>Migration + backup automation</li><li>Rollback runbook</li><li>Restore drill verification</li></ul></div>
+        <div class="card" style="background:rgba(15,28,57,.92)"><strong>Resilience Pro</strong><div class="price">$999</div><ul><li>Migration + backup automation</li><li>Rollback runbook</li><li>Restore drill verification</li></ul></div>
         <div class="card"><strong>Ops Guard</strong><div class="price">$199/mo</div><ul><li>Weekly health checks</li><li>Periodic restore drills</li><li>Upgrade and drift oversight</li></ul></div>
       </div>
     </section>
@@ -91,12 +123,12 @@
     <section class="section"><img class="proof" src="./assets/branding/website-proof-strip.png" alt="NJLabs proof metrics strip" /></section>
 
     <section class="section" id="aors">
-      <h2>Also available: AI Operator Revenue System (AORS)</h2>
-      <p>For SMB operators needing faster conversion, we run AI-assisted lead qualification and follow-up workflows designed to improve response rates, booking rates, and cash conversion in 7–14 days.</p>
+      <h2>Also Available: AI Operator Revenue System (AORS)</h2>
+      <p>For SMB operators that need faster conversion, we deploy AI-assisted qualification and follow-up systems designed to improve reply rates, booking rates, and close velocity in 7–14 days.</p>
     </section>
 
     <section class="section" id="cta">
-      <h2>Ready to harden and scale your OpenClaw setup?</h2>
+      <h2>Ready to harden and scale your OpenClaw stack?</h2>
       <p>Book your audit and get a package recommendation in one call.</p>
       <div class="cta">
         <a class="btn" href="mailto:njlabs@proton.me?subject=Resilience%20Audit%20Request">Request Audit via Email</a>
