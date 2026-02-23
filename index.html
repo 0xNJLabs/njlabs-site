@@ -15,12 +15,11 @@
       color:var(--white);margin:0}
     .wrap{max-width:1120px;margin:0 auto;padding:24px 20px 42px}
     .site-header{position:relative;overflow:hidden;border:1px solid #2a3a62;border-radius:16px;
-      background:linear-gradient(120deg, rgba(8,16,36,.74), rgba(8,16,36,.40)),url('./assets/branding/header-concept4.png') center/cover no-repeat;
+      background:linear-gradient(120deg, rgba(8,16,36,.74), rgba(8,16,36,.40)),url('./assets/branding/header-clean-no-watermark.png') center/cover no-repeat;
       min-height:220px;box-shadow:0 16px 50px rgba(0,0,0,.25)}
-    .site-header-inner{padding:24px 26px;display:flex;align-items:center;gap:16px}
-    .site-header-inner img{width:74px;height:74px;border-radius:12px;object-fit:contain;padding:3px;background:rgba(10,20,45,.35)}
-    .brand-title{font-size:42px;line-height:1;font-weight:760;letter-spacing:-.01em}
-    .brand-sub{font-size:20px;line-height:1.1;color:#d2e3ff;white-space:nowrap}
+    .site-header-inner{padding:18px 20px;display:flex;align-items:flex-start}
+    .header-chip{width:min(720px,92%);height:auto;display:block}
+    
     h1{font-size:42px;line-height:1.1;margin:14px 0;font-weight:740;letter-spacing:-.01em} h2{font-size:30px;margin:0 0 12px;font-weight:700;letter-spacing:-.005em}
     p{color:var(--muted);font-size:18px;line-height:1.6;margin:10px 0}
     .hero{display:grid;grid-template-columns:1fr;gap:12px;align-items:center;margin-top:20px}
@@ -32,18 +31,14 @@
     .card{background:var(--navy-700);border:1px solid #2b3b61;border-radius:12px;padding:16px}.card strong{display:block;font-size:18px;margin-bottom:8px}
     .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.price{font-size:42px;font-weight:800;color:var(--green);margin:8px 0}
     ul{color:var(--muted);line-height:1.7}.footer{margin-top:54px;padding-top:20px;border-top:1px solid #22325a;color:#89a0d0;font-size:14px}
-    @media (max-width:920px){h1{font-size:34px}.hero{grid-template-columns:1fr}.site-header-inner{padding:18px}.brand-title{font-size:34px}.brand-sub{font-size:16px}}
+    @media (max-width:920px){h1{font-size:34px}.hero{grid-template-columns:1fr}.site-header-inner{padding:14px}.header-chip{width:min(560px,95%)}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header class="site-header">
       <div class="site-header-inner">
-        <img src="./assets/branding/logo-mark-concept4-padded.png" alt="NJLabs logo" />
-        <div>
-          <div class="brand-title">NJLabs</div>
-          <div class="brand-sub">Advanced AI Systems</div>
-        </div>
+        <img class="header-chip" src="./assets/branding/header-logo-chip.png" alt="NJLabs Advanced AI Systems" />
       </div>
     </header>
 
