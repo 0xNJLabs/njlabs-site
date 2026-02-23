@@ -13,12 +13,19 @@
       linear-gradient(rgba(5,12,28,.88),rgba(5,12,28,.92)),
       url('./assets/branding/theme-bg.jpg') center/cover fixed no-repeat;
       color:var(--white);margin:0}
-    .wrap{max-width:1120px;margin:0 auto;padding:42px 20px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px 20px 42px}
+    .site-header{position:relative;border:1px solid #2a3a62;border-radius:18px;overflow:hidden;min-height:220px;background:
+      linear-gradient(90deg,rgba(7,14,30,.90),rgba(7,14,30,.55)),
+      url('./assets/branding/njlabs-banner-header.jpg') center/cover no-repeat}
+    .site-header-inner{display:flex;justify-content:space-between;align-items:flex-start;padding:28px 30px}
+    .brand-block{display:flex;flex-direction:column;gap:8px}
+    .brand-title{font-size:44px;font-weight:800;letter-spacing:.02em;line-height:1}
+    .brand-sub{font-size:24px;color:#dbe6ff;font-weight:500}
     .tag{color:var(--blue);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px}
     h1{font-size:54px;line-height:1.04;margin:14px 0} h2{font-size:34px;margin:0 0 12px}
     p{color:var(--muted);font-size:19px;line-height:1.6;margin:10px 0}
-    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;margin-top:22px}
-    .hero img,.proof{width:100%;border-radius:14px;border:1px solid #2a3a62;background:var(--navy-700)}
+    .hero{display:grid;grid-template-columns:1fr;gap:16px;align-items:center;margin-top:24px}
+    .proof{width:100%;border-radius:14px;border:1px solid #2a3a62;background:var(--navy-700)}
     .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
     .btn{background:var(--blue);color:#00132c;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:800;display:inline-block}
     .btn.alt{background:#1e2e57;color:var(--white)} .section{margin-top:52px}
@@ -26,15 +33,20 @@
     .card{background:var(--navy-700);border:1px solid #2b3b61;border-radius:12px;padding:16px}.card strong{display:block;font-size:18px;margin-bottom:8px}
     .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.price{font-size:42px;font-weight:800;color:var(--green);margin:8px 0}
     ul{color:var(--muted);line-height:1.7}.footer{margin-top:54px;padding-top:20px;border-top:1px solid #22325a;color:#89a0d0;font-size:14px}
-    @media (max-width:920px){h1{font-size:40px}.hero{grid-template-columns:1fr}}
+    @media (max-width:920px){h1{font-size:40px}.hero{grid-template-columns:1fr}.site-header-inner{padding:20px}.brand-title{font-size:34px}.brand-sub{font-size:18px}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="top">
-      <img src="./assets/branding/website-logo-horizontal.png" alt="NJLabs logo" style="width:240px;height:auto;border-radius:8px" />
-      <div class="tag">Resilient AI Infrastructure</div>
-    </div>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <div class="brand-block">
+          <div class="brand-title">NJLabs</div>
+          <div class="brand-sub">Advanced AI System</div>
+        </div>
+        <div class="tag">Resilient AI Infrastructure</div>
+      </div>
+    </header>
 
     <section class="hero">
       <div>
@@ -45,7 +57,6 @@
           <a class="btn alt" href="#packages">View Service Packages</a>
         </div>
       </div>
-      <div><img src="./assets/branding/website-hero.png" alt="NJLabs resilience hero graphic" /></div>
     </section>
 
     <section class="section" id="problem">
