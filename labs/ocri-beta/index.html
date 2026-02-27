@@ -3,37 +3,106 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>OCRI Beta — NJLabs</title>
+  <title>OCRI Beta UI — NJLabs</title>
   <style>
-    body{font-family:Inter,Arial,sans-serif;max-width:920px;margin:40px auto;padding:0 16px;line-height:1.5;color:#111}
-    .pill{display:inline-block;padding:4px 10px;border-radius:999px;background:#eef6ff;color:#0b63ce;font-size:12px}
-    .card{border:1px solid #e8e8e8;border-radius:12px;padding:18px;margin:14px 0}
-    code{background:#f6f8fa;padding:2px 6px;border-radius:6px}
+    :root{--bg:#0b1020;--panel:#131a2e;--muted:#93a0c6;--text:#eef2ff;--ok:#18c27a;--warn:#ffb020;--line:#263252;--btn:#2f65ff}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .pill{padding:6px 10px;border-radius:999px;background:#1a2545;color:#9cc0ff;font-size:12px}
+    h1{margin:8px 0 4px;font-size:28px}
+    .sub{color:var(--muted);margin:0 0 16px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+    .card h3{margin:0 0 10px}
+    .row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+    .switch{accent-color:#5f8bff;transform:scale(1.2)}
+    button{background:var(--btn);color:white;border:0;border-radius:10px;padding:10px 12px;font-weight:600;cursor:pointer}
+    button.secondary{background:#243052}
+    .status{font-size:13px;color:var(--muted)}
+    .ok{color:var(--ok)} .warn{color:var(--warn)}
+    .log{background:#0a0f1d;border:1px solid #1f2b4a;border-radius:10px;padding:10px;height:170px;overflow:auto;font-family:ui-monospace,monospace;font-size:12px}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .kpi div{background:#0d1427;border:1px solid #223056;border-radius:10px;padding:10px;text-align:center}
+    a{color:#9cc0ff}
   </style>
 </head>
 <body>
-  <div class="pill">Staging • OCRI Beta</div>
-  <h1>OCRI/OCRP Pre-Launch Test Page</h1>
-  <p>This page is for internal testing before official launch.</p>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="pill">Staging • OCRI/OCRP UI Beta</div>
+        <h1>One-Click OCRI Control UI</h1>
+        <p class="sub">Test UX only (pre-launch). Focus: onboarding, permissions, run flow, evidence.</p>
+      </div>
+      <div class="status">Route: <strong>/labs/ocri-beta/</strong></div>
+    </div>
 
-  <div class="card">
-    <h3>What is being validated</h3>
-    <ul>
-      <li>One-click onboarding UX</li>
-      <li>Migration + backup/restore flow clarity</li>
-      <li>Acceptance and handover expectations</li>
-    </ul>
-  </div>
+    <div class="grid">
+      <section class="card">
+        <h3>1) One-Click Setup</h3>
+        <div class="row"><span>Environment Check</span><span id="env" class="warn">Pending</span></div>
+        <div class="row"><span>Tunnel + Runtime Bind</span><span id="tun" class="warn">Pending</span></div>
+        <div class="row"><span>Workspace Sync</span><span id="sync" class="warn">Pending</span></div>
+        <button onclick="runSetup()">Run One-Click Setup</button>
+      </section>
 
-  <div class="card">
-    <h3>Current Build Status</h3>
-    <p>OCRI live acceptance: <strong>PASS/GO</strong> (internal evidence bundle complete).</p>
-    <p>Remote Operator one-click productization: <strong>in progress</strong>.</p>
-  </div>
+      <section class="card">
+        <h3>2) Granular Permissions</h3>
+        <label class="row"><span>Allow Browser Automation</span><input class="switch" type="checkbox" id="p_browser" checked></label>
+        <label class="row"><span>Allow File Changes</span><input class="switch" type="checkbox" id="p_files"></label>
+        <label class="row"><span>Allow Public Publish Actions</span><input class="switch" type="checkbox" id="p_publish"></label>
+        <label class="row"><span>Require Confirm for Risky Actions</span><input class="switch" type="checkbox" id="p_confirm" checked></label>
+        <button class="secondary" onclick="savePermissions()">Save Permission Policy</button>
+      </section>
 
-  <div class="card">
-    <h3>Test Route</h3>
-    <p>Expected URL: <code>https://njlabs.ai/labs/ocri-beta/</code></p>
+      <section class="card">
+        <h3>3) Run OCRI Flow</h3>
+        <div class="row"><span>Migration Flow</span><span id="mig" class="warn">Not run</span></div>
+        <div class="row"><span>Backup/Restore Drill</span><span id="bak" class="warn">Not run</span></div>
+        <div class="row"><span>Acceptance Pack</span><span id="acc" class="warn">Not run</span></div>
+        <button onclick="runFlow()">Run Validation Flow</button>
+      </section>
+
+      <section class="card">
+        <h3>Live KPI Snapshot</h3>
+        <div class="kpi">
+          <div><div>Progress</div><strong id="k_progress">0%</strong></div>
+          <div><div>Milestone</div><strong id="k_milestone">M0/5</strong></div>
+          <div><div>Status</div><strong id="k_status">Idle</strong></div>
+        </div>
+        <p class="status" style="margin-top:10px">For production, this panel will bind to real OCRI metrics service.</p>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:14px">
+      <h3>Execution Log</h3>
+      <div class="log" id="log"></div>
+      <p class="status">Need testing with Ntando workstation once UI flow approved.</p>
+    </section>
   </div>
+<script>
+  const log = (m)=>{const el=document.getElementById('log'); const t=new Date().toLocaleTimeString(); el.innerHTML += `[${t}] ${m}<br>`; el.scrollTop = el.scrollHeight;}
+  function set(id,txt,ok){ const e=document.getElementById(id); e.textContent=txt; e.className=ok?'ok':'warn'; }
+  function runSetup(){
+    log('Starting one-click setup...');
+    setTimeout(()=>{set('env','OK',true); log('Environment check passed');},500);
+    setTimeout(()=>{set('tun','OK',true); log('Tunnel/runtime bind passed');},900);
+    setTimeout(()=>{set('sync','OK',true); log('Workspace sync passed'); document.getElementById('k_progress').textContent='35%'; document.getElementById('k_milestone').textContent='M2/5'; document.getElementById('k_status').textContent='Setup Done';},1300);
+  }
+  function savePermissions(){
+    const p={browser:p_browser.checked,files:p_files.checked,publish:p_publish.checked,confirm:p_confirm.checked};
+    localStorage.setItem('ocri_policy',JSON.stringify(p));
+    log('Permission policy saved: '+JSON.stringify(p));
+    document.getElementById('k_status').textContent='Policy Saved';
+  }
+  function runFlow(){
+    log('Running OCRI validation flow...');
+    setTimeout(()=>{set('mig','PASS',true); log('Migration flow PASS');},600);
+    setTimeout(()=>{set('bak','PASS',true); log('Backup/restore drill PASS');},1100);
+    setTimeout(()=>{set('acc','PASS',true); log('Acceptance pack generated (staging stub)'); document.getElementById('k_progress').textContent='78%'; document.getElementById('k_milestone').textContent='M4/5'; document.getElementById('k_status').textContent='Validation PASS';},1600);
+  }
+  log('OCRI Beta UI loaded.');
+</script>
 </body>
 </html>
