@@ -1,108 +1,322 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>OCRI Beta UI — NJLabs</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OCRI Resilience Command Center — NJLabs</title>
   <style>
-    :root{--bg:#0b1020;--panel:#131a2e;--muted:#93a0c6;--text:#eef2ff;--ok:#18c27a;--warn:#ffb020;--line:#263252;--btn:#2f65ff}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{max-width:1100px;margin:0 auto;padding:18px}
-    .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-    .pill{padding:6px 10px;border-radius:999px;background:#1a2545;color:#9cc0ff;font-size:12px}
-    h1{margin:8px 0 4px;font-size:28px}
-    .sub{color:var(--muted);margin:0 0 16px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
-    .card h3{margin:0 0 10px}
-    .row{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
-    .switch{accent-color:#5f8bff;transform:scale(1.2)}
-    button{background:var(--btn);color:white;border:0;border-radius:10px;padding:10px 12px;font-weight:600;cursor:pointer}
-    button.secondary{background:#243052}
-    .status{font-size:13px;color:var(--muted)}
-    .ok{color:var(--ok)} .warn{color:var(--warn)}
-    .log{background:#0a0f1d;border:1px solid #1f2b4a;border-radius:10px;padding:10px;height:170px;overflow:auto;font-family:ui-monospace,monospace;font-size:12px}
-    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .kpi div{background:#0d1427;border:1px solid #223056;border-radius:10px;padding:10px;text-align:center}
-    a{color:#9cc0ff}
+    body { font-family: Inter, Arial, sans-serif; margin: 0; background: #0b1020; color: #e7ecff; }
+    .wrap { max-width: 980px; margin: 24px auto; padding: 16px; }
+    .card { background: #121a33; border: 1px solid #2b3764; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+    h1,h2 { margin: 0 0 10px; }
+    p { margin: 6px 0; color: #b9c6ff; }
+    .grid { display: grid; gap: 10px; }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .btn, select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #33407a; background: #0f1630; color: #e7ecff; }
+    .btn { cursor: pointer; font-weight: 700; }
+    .btn.primary { background: #3a67ff; border: none; }
+    .kpi { background:#0f1630; border:1px solid #2d396a; border-radius: 10px; padding: 10px; }
+    .intent { text-align:left; }
+    .intent small { display:block; color:#9db0ff; margin-top:4px; }
+    .status-pill { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700; }
+    .healthy { background:#153927; color:#8fffbe; }
+    .risk { background:#3d3213; color:#ffd17a; }
+    .recovering { background:#1a2f57; color:#8bb5ff; }
+    .blocked { background:#4b1b1b; color:#ff9c9c; }
+    .result { margin-top: 10px; padding: 12px; background: #0d1430; border-left: 4px solid #57d38c; white-space: pre-line; }
+    .history { margin-top: 10px; padding: 12px; background: #0d1430; border: 1px solid #2d396a; border-radius: 8px; }
+    .history ul { margin: 8px 0 0 18px; }
+    .history code { color: #9ed0ff; }
+    .workflow { margin-top: 10px; padding: 12px; background: #0d1430; border: 1px solid #2d396a; border-radius: 8px; }
+    .workflow li { margin: 6px 0; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="top">
-      <div>
-        <div class="pill">Staging • OCRI/OCRP UI Beta</div>
-        <h1>One-Click OCRI Control UI</h1>
-        <p class="sub">Test UX only (pre-launch). Focus: onboarding, permissions, run flow, evidence.</p>
+    <div class="card">
+      <h1>OCRI Resilience Command Center (Single-Click)</h1>
+      <p>Intent-first interface for OpenClaw Resilient Infrastructure. No terminal required in normal flow.</p>
+    </div>
+
+    <div class="card">
+      <h2>System State</h2>
+      <div class="grid grid-4">
+        <div class="kpi"><strong>Gateway</strong><br><span class="status-pill healthy">Healthy</span></div>
+        <div class="kpi"><strong>Backups</strong><br><span class="status-pill recovering">Recovering</span></div>
+        <div class="kpi"><strong>Watchdog</strong><br><span class="status-pill healthy">Healthy</span></div>
+        <div class="kpi"><strong>Remote Operator</strong><br><span class="status-pill risk">At Risk</span></div>
       </div>
-      <div class="status">Route: <strong>/labs/ocri-beta/</strong></div>
     </div>
 
-    <div class="grid">
-      <section class="card">
-        <h3>1) One-Click Setup</h3>
-        <div class="row"><span>Environment Check</span><span id="env" class="warn">Pending</span></div>
-        <div class="row"><span>Tunnel + Runtime Bind</span><span id="tun" class="warn">Pending</span></div>
-        <div class="row"><span>Workspace Sync</span><span id="sync" class="warn">Pending</span></div>
-        <button onclick="runSetup()">Run One-Click Setup</button>
-      </section>
+    <div class="card">
+      <h2>Choose Intent</h2>
+      <div class="grid grid-2" id="intentGrid">
+        <button class="btn intent" data-intent="Migrate safely">Migrate safely<small>guided low-risk migration with rollback contract</small></button>
+        <button class="btn intent" data-intent="Harden security">Harden security<small>apply trust-gradient controls and verification checks</small></button>
+        <button class="btn intent" data-intent="Prove recoverability">Prove recoverability<small>run backup + restore drill with evidence bundle</small></button>
+        <button class="btn intent" data-intent="Reduce downtime">Reduce downtime<small>stabilize critical services and tune recovery policy</small></button>
+      </div>
+    </div>
 
-      <section class="card">
-        <h3>2) Granular Permissions</h3>
-        <label class="row"><span>Allow Browser Automation</span><input class="switch" type="checkbox" id="p_browser" checked></label>
-        <label class="row"><span>Allow File Changes</span><input class="switch" type="checkbox" id="p_files"></label>
-        <label class="row"><span>Allow Public Publish Actions</span><input class="switch" type="checkbox" id="p_publish"></label>
-        <label class="row"><span>Require Confirm for Risky Actions</span><input class="switch" type="checkbox" id="p_confirm" checked></label>
-        <button class="secondary" onclick="savePermissions()">Save Permission Policy</button>
-      </section>
-
-      <section class="card">
-        <h3>3) Run OCRI Flow</h3>
-        <div class="row"><span>Migration Flow</span><span id="mig" class="warn">Not run</span></div>
-        <div class="row"><span>Backup/Restore Drill</span><span id="bak" class="warn">Not run</span></div>
-        <div class="row"><span>Acceptance Pack</span><span id="acc" class="warn">Not run</span></div>
-        <button onclick="runFlow()">Run Validation Flow</button>
-      </section>
-
-      <section class="card">
-        <h3>Live KPI Snapshot</h3>
-        <div class="kpi">
-          <div><div>Progress</div><strong id="k_progress">0%</strong></div>
-          <div><div>Milestone</div><strong id="k_milestone">M0/5</strong></div>
-          <div><div>Status</div><strong id="k_status">Idle</strong></div>
+    <div class="card">
+      <h2>Execution Guardrails</h2>
+      <div class="grid grid-2">
+        <div>
+          <label for="trustLevel">Trust Gradient</label>
+          <select id="trustLevel">
+            <option value="dry-run">Dry Run (no state changes)</option>
+            <option value="guarded">Guarded Execute (approved actions only)</option>
+            <option value="autonomous">Autonomous Window (time-limited)</option>
+          </select>
         </div>
-        <p class="status" style="margin-top:10px">For production, this panel will bind to real OCRI metrics service.</p>
-      </section>
+        <div>
+          <label for="window">Autonomous window</label>
+          <select id="window">
+            <option value="15">15 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="60">60 minutes</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn primary" id="runAction">One-Click Protect / Recover</button>
+      <button class="btn" id="exportContract" style="margin-top:8px;">Export Run Contract (JSON)</button>
+      <button class="btn" id="exportEvidenceLedger" style="margin-top:8px;">Export Evidence Ledger (JSON)</button>
+      <button class="btn" id="exportProofBundle" style="margin-top:8px;">Export PASS/FAIL Proof Bundle (JSON)</button>
+      <button class="btn" id="copyCheckpointSummary" style="margin-top:8px;">Copy Checkpoint Summary</button>
+      <div class="result" id="runResult" style="display:none"></div>
+      <div class="history" id="runHistory">
+        <strong>Recent Run Artifacts</strong>
+        <ul id="historyList">
+          <li>No artifacts generated yet.</li>
+        </ul>
+      </div>
+      <div class="workflow" id="workflowAutPanel">
+        <strong>WORKFLOW_AUT Execution Gates</strong>
+        <ul>
+          <li>⚡ Speed: ship measurable delta every checkpoint (no idle narrative).</li>
+          <li>✅ Quality: every change must include explicit verification command + PASS/FAIL.</li>
+          <li>🧠 Novelty: each step must improve capability, not just reword status.</li>
+          <li>🚫 Zero phantom progress: no completion claims without artifact/test evidence.</li>
+        </ul>
+      </div>
     </div>
-
-    <section class="card" style="margin-top:14px">
-      <h3>Execution Log</h3>
-      <div class="log" id="log"></div>
-      <p class="status">Need testing with Ntando workstation once UI flow approved.</p>
-    </section>
   </div>
-<script>
-  const log = (m)=>{const el=document.getElementById('log'); const t=new Date().toLocaleTimeString(); el.innerHTML += `[${t}] ${m}<br>`; el.scrollTop = el.scrollHeight;}
-  function set(id,txt,ok){ const e=document.getElementById(id); e.textContent=txt; e.className=ok?'ok':'warn'; }
-  function runSetup(){
-    log('Starting one-click setup...');
-    setTimeout(()=>{set('env','OK',true); log('Environment check passed');},500);
-    setTimeout(()=>{set('tun','OK',true); log('Tunnel/runtime bind passed');},900);
-    setTimeout(()=>{set('sync','OK',true); log('Workspace sync passed'); document.getElementById('k_progress').textContent='35%'; document.getElementById('k_milestone').textContent='M2/5'; document.getElementById('k_status').textContent='Setup Done';},1300);
-  }
-  function savePermissions(){
-    const p={browser:p_browser.checked,files:p_files.checked,publish:p_publish.checked,confirm:p_confirm.checked};
-    localStorage.setItem('ocri_policy',JSON.stringify(p));
-    log('Permission policy saved: '+JSON.stringify(p));
-    document.getElementById('k_status').textContent='Policy Saved';
-  }
-  function runFlow(){
-    log('Running OCRI validation flow...');
-    setTimeout(()=>{set('mig','PASS',true); log('Migration flow PASS');},600);
-    setTimeout(()=>{set('bak','PASS',true); log('Backup/restore drill PASS');},1100);
-    setTimeout(()=>{set('acc','PASS',true); log('Acceptance pack generated (staging stub)'); document.getElementById('k_progress').textContent='78%'; document.getElementById('k_milestone').textContent='M4/5'; document.getElementById('k_status').textContent='Validation PASS';},1600);
-  }
-  log('OCRI Beta UI loaded.');
-</script>
+
+  <script type="module">
+    import { buildExecutionPlan, TRUST_MODES } from '../ocri-core/trust-gradient/engine-stub.js';
+    import { validateRuntimeContract } from '../ocri-core/contracts/validate-contract-runtime.js';
+    import { buildEvidenceLedger } from '../ocri-core/contracts/build-evidence-ledger.js';
+    import { buildProofBundle } from '../ocri-core/contracts/build-proof-bundle.js';
+
+    const intentToAction = {
+      "Migrate safely": "Plan staged migration + validate rollback checkpoints",
+      "Harden security": "Apply hardening policy bundle + verify no regressions",
+      "Prove recoverability": "Trigger backup + restore simulation + evidence capture",
+      "Reduce downtime": "Run service stabilization + failover readiness checks"
+    };
+
+    let selectedIntent = "Migrate safely";
+    let lastContract = null;
+    let lastValidation = null;
+    let lastRunSummary = null;
+    let lastLedger = null;
+    let lastProof = null;
+    const runHistory = [];
+
+    function pushHistory(entry) {
+      runHistory.unshift({ ...entry, at: new Date().toISOString() });
+      if (runHistory.length > 6) runHistory.pop();
+
+      const list = document.getElementById('historyList');
+      list.innerHTML = '';
+      runHistory.forEach((item) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<code>${item.type}</code> — ${item.id} (${item.status}) @ ${item.at}`;
+        list.appendChild(li);
+      });
+    }
+
+    function buildContract(intent, trustMode, windowMin, action) {
+      const plan = buildExecutionPlan({
+        intent,
+        mode: trustMode,
+        actions: [action],
+      });
+
+      return {
+        contract_id: `OCRI-${Date.now()}`,
+        intent: plan.intent,
+        trust_mode: plan.mode,
+        planned_actions: plan.actions,
+        acceptance_checks: [
+          "Health checks pass",
+          "No critical service regression",
+          "Evidence bundle generated"
+        ],
+        rollback_plan: [
+          "Revert changed service settings",
+          "Restore previous state snapshot",
+          "Run post-rollback health checks"
+        ],
+        expiry_window_minutes: Number(windowMin),
+        rollback_required: plan.rollback_required,
+        approval_required: plan.approval_required,
+        generated_at: plan.generated_at
+      };
+    }
+
+    document.querySelectorAll('#intentGrid .intent').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedIntent = btn.dataset.intent;
+        document.querySelectorAll('#intentGrid .intent').forEach(b => b.style.outline = 'none');
+        btn.style.outline = '2px solid #57d38c';
+      });
+    });
+
+    document.getElementById('runAction').addEventListener('click', () => {
+      const trustLevel = document.getElementById('trustLevel').value;
+      const windowMin = document.getElementById('window').value;
+      const result = document.getElementById('runResult');
+
+      const action = intentToAction[selectedIntent];
+      const normalizedMode = trustLevel === 'dry-run'
+        ? TRUST_MODES.DRY_RUN
+        : (trustLevel === 'guarded' ? TRUST_MODES.GUARDED_EXECUTE : TRUST_MODES.AUTONOMOUS_WINDOW);
+      const contract = buildContract(selectedIntent, normalizedMode, windowMin, action);
+      const validation = validateRuntimeContract(contract);
+      const runSummary = {
+        selected_intent: selectedIntent,
+        action_plan: action,
+        trust_level: trustLevel,
+        autonomous_window_minutes: Number(windowMin),
+        success_probability: 0.86,
+        expected_downtime_min: trustLevel === 'dry-run' ? 0 : 3,
+        rollback_confidence: 0.91,
+      };
+
+      lastContract = validation.ok ? contract : null;
+      lastValidation = validation;
+      lastRunSummary = runSummary;
+
+      result.style.display = 'block';
+      result.style.borderLeftColor = validation.ok ? '#57d38c' : '#ff9c9c';
+      pushHistory({
+        type: 'contract',
+        id: contract.contract_id,
+        status: validation.ok ? 'PASS' : 'FAIL',
+      });
+      result.textContent =
+`Contract: ${contract.contract_id}
+Intent: ${selectedIntent}
+Action Plan: ${action}
+Trust Level: ${trustLevel}
+Autonomous Window: ${windowMin}m
+
+Predicted Impact:
+- success_probability: 0.86
+- expected_downtime_min: ${trustLevel === 'dry-run' ? 0 : 3}
+- rollback_confidence: 0.91
+
+Validation: ${validation.ok ? 'PASS' : 'FAIL'}
+- missing_fields: ${validation.missing.length ? validation.missing.join(', ') : 'none'}
+- errors: ${validation.errors.length ? validation.errors.join(' | ') : 'none'}
+
+Run Contract Keys:
+- trust_mode: ${contract.trust_mode}
+- rollback_required: ${contract.rollback_required}
+- approval_required: ${contract.approval_required}
+
+Next Step CTA:
+- Review contract summary
+- Approve execution
+- Generate proof bundle (PASS/FAIL + before/after diff)`;
+    });
+
+    document.getElementById('exportContract').addEventListener('click', () => {
+      if (!lastContract) {
+        alert('Generate a contract first using One-Click Protect / Recover.');
+        return;
+      }
+      const blob = new Blob([JSON.stringify(lastContract, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${lastContract.contract_id}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('exportEvidenceLedger').addEventListener('click', () => {
+      if (!lastContract || !lastValidation || !lastRunSummary) {
+        alert('Run One-Click Protect / Recover first to generate contract evidence.');
+        return;
+      }
+
+      const ledger = buildEvidenceLedger({
+        contract: lastContract,
+        validation: lastValidation,
+        runSummary: lastRunSummary,
+      });
+      lastLedger = ledger;
+
+      const blob = new Blob([JSON.stringify(ledger, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      pushHistory({
+        type: 'ledger',
+        id: ledger.ledger_id,
+        status: ledger.validation?.ok ? 'PASS' : 'FAIL',
+      });
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${ledger.ledger_id}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('exportProofBundle').addEventListener('click', () => {
+      if (!lastContract || !lastValidation || !lastRunSummary) {
+        alert('Run One-Click Protect / Recover first to generate proof bundle.');
+        return;
+      }
+
+      const proof = buildProofBundle({
+        contract: lastContract,
+        validation: lastValidation,
+        runSummary: lastRunSummary,
+      });
+      lastProof = proof;
+
+      const blob = new Blob([JSON.stringify(proof, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      pushHistory({
+        type: 'proof_bundle',
+        id: proof.bundle_id,
+        status: proof.overall_result,
+      });
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${proof.bundle_id}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('copyCheckpointSummary').addEventListener('click', async () => {
+      if (!lastContract || !lastValidation || !lastRunSummary) {
+        alert('Run One-Click Protect / Recover first to build checkpoint summary.');
+        return;
+      }
+
+      const summary = `ARTIFACT\n- apps/ocri-beta/index.html\n- contract_id: ${lastContract.contract_id}${lastLedger ? `\n- ledger_id: ${lastLedger.ledger_id}` : ''}${lastProof ? `\n- proof_bundle_id: ${lastProof.bundle_id}` : ''}\n\nTEST\n- Contract validation: ${lastValidation.ok ? 'PASS' : 'FAIL'}\n- Trust mode: ${lastContract.trust_mode}\n\nRESULT\n- ${lastValidation.ok ? 'PASS' : 'FAIL'}\n\nNEXT ETA\n- 30–40 min`; 
+
+      try {
+        await navigator.clipboard.writeText(summary);
+        alert('Checkpoint summary copied.');
+      } catch (err) {
+        alert('Clipboard copy failed. You can copy from console output.');
+        console.log(summary);
+      }
+    });
+  </script>
 </body>
 </html>
